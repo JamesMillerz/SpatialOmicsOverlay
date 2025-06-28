@@ -1,0 +1,27 @@
+name: Automated Mainnet Deployment
+
+on:
+  push:
+    branches:
+      - main  # Or your main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18  # Or your preferred Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to Mainnet
+        run: |
+          truffle migrate --network mainnet
+          echo "Deployment successful!"
+          # Add steps to verify the deployment (e.g., using Etherscan API)
